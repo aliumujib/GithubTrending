@@ -33,6 +33,15 @@ ext {
     espressoVersion = '2.2.2'
     espressoRulesVersion = '0.5'
     playServicesVersion = '11.6.0'
+    okHttpLoggingVersion = '3.4.1'
+    dateTimePicker = "3.5.1"
+    greenRobotUtilsVersion = "1.1.6"
+    materialStyledDialogsVersion = "2.1"
+    firebaseJobDispatcher = "0.5.2"
+    materialChipsVersion = "1.2.1"
+    archLifeCycleComponentsVersion = '1.1.0'
+    roomVersion = '1.0.0'
+
 
     //Testing
     jUnitVersion = '4.12'
@@ -41,6 +50,7 @@ ext {
     espressoContribVersion = '2.2.2'
     testingSupportLibVersion = '0.1'
     mockWebServerVersion = '3.6.0'
+
 
     appDependencies = [
             daggerCompiler          : "com.google.dagger:dagger-compiler:${daggerVersion}",
@@ -63,7 +73,19 @@ ext {
             leakCanary              : "com.squareup.leakcanary:leakcanary-android:${leakCanaryVersion}",
             fragmentArgs            : "com.hannesdorfmann.fragmentargs:annotation:${fragmentArgsVersion}",
             fragmentArgsCompiler    : "com.hannesdorfmann.fragmentargs:processor:${fragmentArgsVersion}",
-            cardView                : "com.android.support:cardview-v7:$rootProject.ext.supportVersion"
+            cardView                : "com.android.support:cardview-v7:$rootProject.ext.supportVersion",
+            playServicesMaps     : "com.google.android.gms:play-services-maps:${playServicesVersion}",
+            playServicesLocation : "com.google.android.gms:play-services-location:${playServicesVersion}",
+            firebaseCore         : "com.google.firebase:firebase-core:${playServicesVersion}",
+            firebaseMessaging    : "com.google.firebase:firebase-messaging:${playServicesVersion}",
+            androidMapUtils      : "com.google.maps.android:android-maps-utils:0.5",
+            greenRobotUtils      : "com.github.remychantenay:greenrobotutils:${greenRobotUtilsVersion}",
+            dateTimePicker       : "com.wdullaer:materialdatetimepicker:${dateTimePicker}",
+            roomDB               : "android.arch.persistence.room:runtime:${roomVersion}",
+            roomCompiler         : "android.arch.persistence.room:compiler:${roomVersion}",
+            roomRxJava2          : "android.arch.persistence.room:rxjava2:${roomVersion}",
+            materialStyledDialogs: "com.github.javiersantos:MaterialStyledDialogs:${materialStyledDialogsVersion}",
+            firebaseJobDispatcher: "com.firebase:firebase-jobdispatcher:${firebaseJobDispatcher}"
     ]
 
     testDependencies = [

@@ -5,4 +5,4 @@ package com.aliumujib.githubtrending.model
  *
  *  Represents a user on the presentation layer
  */
-class User(val name: String, val imageUrl: String)
+class User constructor(val name: String, val imageUrl: String)

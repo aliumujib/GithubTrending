@@ -1,8 +1,7 @@
 package com.aliumujib.githubtrending.ui.repolist
 
 import com.aliumujib.githubtrending.base.BasePresenter
-import com.aliumujib.githubtrending.model.Repository
-import com.aliumujib.githubtrending.mvp.Presentable
+import com.aliumujib.githubtrending.model.RepositoryEntity
 
 /**
  * Created by aliumujib on 12/05/2018.
@@ -17,7 +16,7 @@ class RepoListPresenter : BasePresenter<RepoListContracts.View>(), RepoListContr
 
 
 
-    override fun onGetRepoSuccess(data: MutableList<Repository>) {
+    override fun onGetRepoSuccess(data: MutableList<RepositoryEntity>) {
 
     }
 

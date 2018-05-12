@@ -62,14 +62,13 @@ dependencies {
             appDependencies.gson,
             appDependencies.rxJava,
             appDependencies.rxAndroid,
-            appDependencies.retrofit,
-            appDependencies.retrofitGson,
-            appDependencies.retrofitRxAdapter,
             appDependencies.okhttp3LogginInterceptor,
-            appDependencies.androidAnnotations
+            appDependencies.androidAnnotations,
+            appDependencies.roomDB
     )
 
     kapt appDependencies.daggerCompiler
+    kapt appDependencies.roomCompiler
     provided appDependencies.javaxAnnotation
 
     testCompile (
