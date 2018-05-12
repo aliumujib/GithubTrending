@@ -1,7 +1,10 @@
 package com.aliumujib.githubtrending.model
 
+<<<<<<< HEAD
 import android.os.Parcel
 import android.os.Parcelable
+=======
+>>>>>>> b8a409618f2277284511ab58c00096fbee42ea2a
 import com.aliumujib.data.model.UserEntity
 import com.google.gson.annotations.SerializedName
 
@@ -13,6 +16,7 @@ import com.google.gson.annotations.SerializedName
 
 class Repository(val id: Int?, val repoFullName: String,
                  val repoName: String, val repoDescription: String,
+<<<<<<< HEAD
                  val user: User, val starsCount: Int,
                  val language: String) : Parcelable {
     constructor(parcel: Parcel) : this(
@@ -49,3 +53,7 @@ class Repository(val id: Int?, val repoFullName: String,
     }
 
 }
+=======
+                 val user: UserEntity, val starsCount: Int,
+                 val language: String)
+>>>>>>> b8a409618f2277284511ab58c00096fbee42ea2a
