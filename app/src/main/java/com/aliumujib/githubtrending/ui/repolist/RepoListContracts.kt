@@ -1,6 +1,7 @@
 package com.aliumujib.githubtrending.ui.repolist
 
 import com.aliumujib.githubtrending.model.Repository
+import com.aliumujib.githubtrending.model.RepositoryEntity
 import com.aliumujib.githubtrending.mvp.Viewable
 
 /**

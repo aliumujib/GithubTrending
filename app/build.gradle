@@ -1,7 +1,5 @@
 apply plugin: 'com.android.application'
-
 apply plugin: 'kotlin-android'
-
 apply plugin: 'kotlin-android-extensions'
 
 android {
@@ -54,6 +52,9 @@ dependencies {
             appDependencies.fragmentArgs,
             appDependencies.cardView,
             appDependencies.constraintLayout,
+            appDependencies.retrofit,
+            appDependencies.retrofitGson,
+            appDependencies.retrofitRxAdapter,
 
             project(':domain'),
             project(':data')
