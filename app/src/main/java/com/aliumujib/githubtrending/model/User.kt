@@ -8,7 +8,6 @@ import android.os.Parcelable
  *
  *  Represents a user on the presentation layer
  */
-<<<<<<< HEAD
 class User constructor(private val name: String, private val imageUrl: String) : Parcelable {
     constructor(parcel: Parcel) : this(
             parcel.readString(),
@@ -33,6 +32,3 @@ class User constructor(private val name: String, private val imageUrl: String) :
         }
     }
 }
-=======
-class User constructor(val name: String, val imageUrl: String)
->>>>>>> b8a409618f2277284511ab58c00096fbee42ea2a

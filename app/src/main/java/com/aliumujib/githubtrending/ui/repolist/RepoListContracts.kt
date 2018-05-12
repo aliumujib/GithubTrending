@@ -1,9 +1,6 @@
 package com.aliumujib.githubtrending.ui.repolist
 
-<<<<<<< HEAD
 import com.aliumujib.githubtrending.model.Repository
-=======
->>>>>>> b8a409618f2277284511ab58c00096fbee42ea2a
 import com.aliumujib.githubtrending.model.RepositoryEntity
 import com.aliumujib.githubtrending.mvp.Viewable
 
@@ -14,14 +11,14 @@ import com.aliumujib.githubtrending.mvp.Viewable
 interface RepoListContracts{
 
     interface View : Viewable {
-        fun setData(data: MutableList<RepositoryEntity>)
+        fun setData(data: MutableList<Repository>)
     }
 
 
 
     interface Presenter{
 
-        fun onGetRepoSuccess(data: MutableList<RepositoryEntity>)
+        fun onGetRepoSuccess(data: MutableList<Repository>)
 
         fun onGetDataFailure()
 
