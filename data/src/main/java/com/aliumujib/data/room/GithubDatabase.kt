@@ -1,8 +1,8 @@
-package com.yossisegev.data.db
 
 import android.arch.persistence.room.Database
 import android.arch.persistence.room.RoomDatabase
 import com.aliumujib.data.model.UserEntity
+import com.aliumujib.data.room.GithubDao
 import com.aliumujib.githubtrending.model.RepositoryEntity
 
 
@@ -11,5 +11,5 @@ import com.aliumujib.githubtrending.model.RepositoryEntity
  */
 @Database(entities = arrayOf(RepositoryEntity::class, UserEntity::class), version = 1)
 abstract class GithubDatabase : RoomDatabase() {
-    abstract fun getMoviesDao(): GithubDao
+    abstract fun getGitHubDao(): GithubDao
 }

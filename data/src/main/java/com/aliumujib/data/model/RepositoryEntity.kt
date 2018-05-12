@@ -1,6 +1,8 @@
 package com.aliumujib.githubtrending.model
 
 import android.arch.persistence.room.Entity
+import android.arch.persistence.room.Ignore
+import android.arch.persistence.room.PrimaryKey
 import com.aliumujib.data.model.UserEntity
 import com.google.gson.annotations.SerializedName
 
@@ -10,8 +12,11 @@ import com.google.gson.annotations.SerializedName
  * Represents a repository on the presentation layer
  */
 
-@Entity
-class RepositoryEntity(@SerializedName("id") val id: Int?, @SerializedName("full_name") val repoFullName: String,
-                       @SerializedName("name") val repoName: String, @SerializedName("description") val repoDescription: String,
-                       @SerializedName("owner") val user: UserEntity, @SerializedName("stargazers_count") val starsCount: Int,
-                       @SerializedName("language") val language: String)
+@Entity(tableName = "REPOSITORIES")
+data class RepositoryEntity constructor(@PrimaryKey @SerializedName("id") var id: Int?,
+                                        @SerializedName("full_name") var repoFullName: String,
+                                        @SerializedName("name") var repoName: String,
+                                        @SerializedName("description") var repoDescription: String,
+                                        @Ignore @SerializedName("owner") var user: UserEntity,
+                                        @SerializedName("stargazers_count") var starsCount: Int,
+                                        @SerializedName("language") var language: String)

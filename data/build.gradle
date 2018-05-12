@@ -64,7 +64,11 @@ dependencies {
             appDependencies.rxAndroid,
             appDependencies.okhttp3LogginInterceptor,
             appDependencies.androidAnnotations,
-            appDependencies.roomDB
+            appDependencies.roomDB,
+            appDependencies.roomRxJava2,
+            appDependencies.retrofit,
+            appDependencies.retrofitGson,
+            appDependencies.retrofitRxAdapter,
     )
 
     kapt appDependencies.daggerCompiler

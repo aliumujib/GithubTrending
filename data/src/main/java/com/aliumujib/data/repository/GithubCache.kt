@@ -1,9 +1,8 @@
 package com.aliumujib.data.repository
 
 import com.aliumujib.data.contracts.IGitHubCache
-import com.aliumujib.data.contracts.IGitHubCloud
 import com.aliumujib.githubtrending.model.RepositoryEntity
-import com.yossisegev.data.db.GithubDao
+import com.aliumujib.data.room.GithubDao
 import io.reactivex.Observable
 import javax.inject.Inject
 

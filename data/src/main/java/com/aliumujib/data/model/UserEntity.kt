@@ -1,6 +1,7 @@
 package com.aliumujib.data.model
 
 import android.arch.persistence.room.Entity
+import android.arch.persistence.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
 /**
@@ -10,6 +11,6 @@ import com.google.gson.annotations.SerializedName
  */
 
 @Entity
-class UserEntity(@SerializedName("login") val name: String,
-                 @SerializedName("avatar_url") val imageUrl: String,
-                 @SerializedName("id") val id: Int?)
+data class UserEntity(@SerializedName("login")  var name: String,
+                 @SerializedName("avatar_url")  var imageUrl: String,
+                 @PrimaryKey @SerializedName("id")  var id: Int?)

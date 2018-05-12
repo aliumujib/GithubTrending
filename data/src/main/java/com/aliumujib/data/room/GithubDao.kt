@@ -1,4 +1,4 @@
-package com.yossisegev.data.db
+package com.aliumujib.data.room
 
 import android.arch.persistence.room.*
 import com.aliumujib.githubtrending.model.RepositoryEntity
@@ -10,7 +10,7 @@ import io.reactivex.Flowable
 @Dao
 interface GithubDao {
 
-    @Query("SELECT * FROM movies")
+    @Query("SELECT * FROM REPOSITORIES")
     fun getFavorites(): Flowable<List<RepositoryEntity>>
 
 }
