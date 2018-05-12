@@ -1,6 +1,7 @@
 package com.aliumujib.githubtrending.ui.repolist
 
 import com.aliumujib.githubtrending.model.Repository
+import com.aliumujib.githubtrending.mvp.Viewable
 
 /**
  * Created by aliumujib on 12/05/2018.
@@ -8,13 +9,13 @@ import com.aliumujib.githubtrending.model.Repository
 
 interface RepoListContracts{
 
-    interface RepoListView{
+    interface View : Viewable {
         fun setData(data: MutableList<Repository>)
     }
 
 
 
-    interface RepoListPresenter{
+    interface Presenter{
 
         fun onGetRepoSuccess(data: MutableList<Repository>)
 

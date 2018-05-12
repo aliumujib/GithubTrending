@@ -8,11 +8,10 @@ import com.aliumujib.githubtrending.mvp.Viewable
  */
 
 
-abstract class BasePresenter<T : Viewable> : Presentable {
+@Suppress("UNCHECKED_CAST")
+abstract class BasePresenter<out T : Viewable> : Presentable {
 
-    var view: T? = null
-        private set
-
+    private var view: T? = null
 
     override val isViewAttached: Boolean
         get() = view != null
@@ -21,32 +20,32 @@ abstract class BasePresenter<T : Viewable> : Presentable {
         // No-op by default
     }
 
-    override  fun onViewCreated() {
+    override fun onViewCreated() {
         // No-op by default
     }
 
-    override  fun onResume() {
+    override fun onResume() {
         // No-op by default
     }
 
-    override  fun onPause() {
+    override fun onPause() {
         // No-op by default
     }
 
-    override  fun onStop() {
+    override fun onStop() {
         // No-op by default
     }
 
-    fun attachView(viewable: T) {
-        this.view = viewable
+    fun attachView(viewable: Any) {
+        this.view = viewable as T
     }
 
-    override  fun detachView() {
+    override fun detachView() {
         this.view = null
     }
 
     @Throws(ViewNotAttachedException::class)
-    override  fun checkViewAttached() {
+    override fun checkViewAttached() {
         if (!isViewAttached) throw ViewNotAttachedException()
     }
 

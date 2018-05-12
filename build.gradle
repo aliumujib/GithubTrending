@@ -2,7 +2,7 @@
 apply from: 'system/dependencies.gradle'
 
 buildscript {
-    ext.kotlin_version = '1.1.51'
+    ext.kotlin_version = '1.2.31'
     repositories {
         google()
         jcenter()
@@ -20,6 +20,8 @@ allprojects {
     repositories {
         google()
         jcenter()
+        mavenCentral()
+
     }
 }
 

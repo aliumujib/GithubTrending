@@ -1,22 +1,18 @@
 package com.aliumujib.githubtrending.ui.repolist
 
 
-import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-
 import com.aliumujib.githubtrending.R
+import com.aliumujib.githubtrending.base.BaseFragment
+import com.aliumujib.githubtrending.model.Repository
 
 
-class RepoListFragment : Fragment() {
+class RepoListFragment : BaseFragment<RepoListPresenter>(), RepoListContracts.View {
 
+    override val layoutId: Int
+        get() = R.layout.fragment_repo_list
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_repo_list, container, false)
+    override fun setData(data: MutableList<Repository>) {
+
     }
 
 }

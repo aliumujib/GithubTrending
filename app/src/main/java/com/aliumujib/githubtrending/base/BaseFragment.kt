@@ -17,7 +17,7 @@ import com.hannesdorfmann.fragmentargs.FragmentArgs
  * Created by aliumujib on 12/05/2018.
  */
 
-abstract class BaseFragment<in T : BasePresenter<Viewable>> : Fragment(), Viewable {
+abstract class BaseFragment<in T : BasePresenter< Viewable>> : Fragment(), Viewable {
 
     /**
      * {@inheritDoc}
