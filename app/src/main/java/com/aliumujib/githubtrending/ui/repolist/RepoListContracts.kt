@@ -1,5 +1,6 @@
 package com.aliumujib.githubtrending.ui.repolist
 
+import android.arch.paging.PagedList
 import com.aliumujib.githubtrending.model.Repository
 import com.aliumujib.githubtrending.model.RepositoryEntity
 import com.aliumujib.githubtrending.mvp.Viewable
@@ -8,19 +9,23 @@ import com.aliumujib.githubtrending.mvp.Viewable
  * Created by aliumujib on 12/05/2018.
  */
 
-interface RepoListContracts{
+interface RepoListContracts {
 
     interface View : Viewable {
         fun setData(data: MutableList<Repository>)
+
+        fun setPagedData(data: PagedList<Repository>)
+
+
     }
 
 
-
-    interface Presenter{
+    interface Presenter {
 
         fun onGetRepoSuccess(data: MutableList<Repository>)
 
         fun onGetDataFailure()
 
+        fun retry()
     }
 }

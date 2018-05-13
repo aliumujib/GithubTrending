@@ -10,4 +10,5 @@ interface IGitHubCache {
 
     fun getRepositories(filters: Map<String, String>): Observable<List<RepositoryEntity>>
 
+    fun putRepositories(repos: List<RepositoryEntity>)
 }

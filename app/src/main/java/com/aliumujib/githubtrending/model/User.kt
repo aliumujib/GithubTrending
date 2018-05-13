@@ -8,7 +8,7 @@ import android.os.Parcelable
  *
  *  Represents a user on the presentation layer
  */
-class User constructor(private val name: String, private val imageUrl: String) : Parcelable {
+data class User constructor(private val name: String, private val imageUrl: String) : Parcelable {
     constructor(parcel: Parcel) : this(
             parcel.readString(),
             parcel.readString())
