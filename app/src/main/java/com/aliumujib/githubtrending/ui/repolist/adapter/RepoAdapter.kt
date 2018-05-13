@@ -1,6 +1,5 @@
 package com.aliumujib.githubtrending.ui.repolist.adapter
 
-import android.arch.paging.PagedListAdapter
 import android.support.v7.util.DiffUtil
 import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
@@ -11,14 +10,26 @@ import com.aliumujib.githubtrending.model.Repository
 /**
  * A simple adapter implementation that shows Reddit posts.
  */
-class PostsAdapter(private val retryCallback: () -> Unit) : PagedListAdapter<Repository, RecyclerView.ViewHolder>(POST_COMPARATOR) {
+class RepoAdapter(private val retryCallback: () -> Unit) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
+    private var list: MutableList<Repository> = mutableListOf()
     private var networkState: NetworkState? = null
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (getItemViewType(position)) {
-            R.layout.repo_list_item -> (holder as GithubRepoViewHolder).bind(getItem(position))
+            R.layout.repo_list_item -> (holder as GithubRepoViewHolder).bind(list[position])
             R.layout.network_state_item -> (holder as NetworkStateItemViewHolder).bindTo(
                     networkState)
         }
+    }
+
+    fun publishChanges(data: List<Repository>) {
+        val diffCallback = RepoDiffCallBack(this.list, data)
+        val diffResult = DiffUtil.calculateDiff(diffCallback)
+
+        this.list.clear()
+        this.list.addAll(data)
+
+        diffResult.dispatchUpdatesTo(this)
     }
 
     override fun onBindViewHolder(
@@ -26,12 +37,13 @@ class PostsAdapter(private val retryCallback: () -> Unit) : PagedListAdapter<Rep
             position: Int,
             payloads: MutableList<Any>) {
         if (payloads.isNotEmpty()) {
-            val item = getItem(position)
+            val item = list[position]
             (holder as GithubRepoViewHolder).updateScore(item)
         } else {
             onBindViewHolder(holder, position)
         }
     }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
@@ -52,7 +64,7 @@ class PostsAdapter(private val retryCallback: () -> Unit) : PagedListAdapter<Rep
     }
 
     override fun getItemCount(): Int {
-        return super.getItemCount() + if (hasExtraRow()) 1 else 0
+        return list.size + if (hasExtraRow()) 1 else 0
     }
 
     fun setNetworkState(newNetworkState: NetworkState?) {
@@ -62,9 +74,9 @@ class PostsAdapter(private val retryCallback: () -> Unit) : PagedListAdapter<Rep
         val hasExtraRow = hasExtraRow()
         if (hadExtraRow != hasExtraRow) {
             if (hadExtraRow) {
-                notifyItemRemoved(super.getItemCount())
+                notifyItemRemoved(itemCount)
             } else {
-                notifyItemInserted(super.getItemCount())
+                notifyItemInserted(itemCount)
             }
         } else if (hasExtraRow && previousState != newNetworkState) {
             notifyItemChanged(itemCount - 1)

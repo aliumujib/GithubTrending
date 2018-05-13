@@ -7,8 +7,10 @@ import android.view.View
 import com.aliumujib.githubtrending.R
 import com.aliumujib.githubtrending.base.BaseFragment
 import com.aliumujib.githubtrending.model.Repository
-import com.aliumujib.githubtrending.ui.repolist.adapter.PostsAdapter
+import com.aliumujib.githubtrending.ui.repolist.adapter.PagedRepoAdapter
+import com.aliumujib.githubtrending.ui.repolist.adapter.RepoAdapter
 import kotlinx.android.synthetic.main.fragment_repo_list.*
+import javax.inject.Inject
 
 
 class RepoListFragment : BaseFragment<RepoListPresenter>(), RepoListContracts.View {
@@ -25,17 +27,23 @@ class RepoListFragment : BaseFragment<RepoListPresenter>(), RepoListContracts.Vi
         }
     }
 
+    override fun injectDependencies() {
+        super.injectDependencies()
+    }
+
+
+
     override val layoutId: Int
         get() = R.layout.fragment_repo_list
 
-    private lateinit var adapter: PostsAdapter
+    private lateinit var adapter: RepoAdapter
 
     override fun setData(data: MutableList<Repository>) {
 
     }
 
     override fun setPagedData(data: PagedList<Repository>) {
-        adapter.submitList(data)
+       // adapter.submitList(data)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -43,8 +51,13 @@ class RepoListFragment : BaseFragment<RepoListPresenter>(), RepoListContracts.Vi
         initAdapter()
     }
 
+    @Inject
+    override fun injectPresenter(presenter: RepoListPresenter) {
+        super.injectPresenter(presenter)
+    }
+
     private fun initAdapter() {
-        adapter = PostsAdapter({ presenter?.retry() })
+        adapter = RepoAdapter({ getPresenter()?.retry() })
         recyclerview.adapter = adapter
 
 //        model.posts.observe(this, Observer<PagedList<RedditPost>> {

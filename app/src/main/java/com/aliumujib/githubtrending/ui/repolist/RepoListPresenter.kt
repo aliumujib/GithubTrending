@@ -14,15 +14,12 @@ import io.reactivex.Flowable
 /**
  * Created by aliumujib on 12/05/2018.
  */
-class RepoListPresenter(var githubCache: GithubCache, ) : BasePresenter<RepoListContracts.View>(), RepoListContracts.Presenter {
+class RepoListPresenter(var githubCache: GithubCache) : BasePresenter<RepoListContracts.View>(), RepoListContracts.Presenter {
 
     override fun onViewCreated() {
         super.onViewCreated()
 
-        val concertList: Flowable<PagedList<Repository>> = RxPagedListBuilder(
-                githubCache.getRepositories(HashMap()),
-                /* page size */ 50
-        ).buildFlowable(BackpressureStrategy.LATEST)
+
     }
 
     override fun retry() {

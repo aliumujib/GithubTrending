@@ -12,17 +12,18 @@ import android.view.View
 import android.view.ViewGroup
 import com.aliumujib.githubtrending.mvp.Viewable
 import com.hannesdorfmann.fragmentargs.FragmentArgs
+import javax.inject.Inject
 
 /**
  * Created by aliumujib on 12/05/2018.
  */
 
-abstract class BaseFragment<in T : BasePresenter< Viewable>> : Fragment(), Viewable {
+abstract class BaseFragment<T : BasePresenter<Viewable>> : Fragment(), Viewable {
 
     /**
      * {@inheritDoc}
      */
-    protected var presenter: T? = null
+    private var presenter: T? = null
 
     protected abstract val layoutId: Int
 
@@ -35,6 +36,11 @@ abstract class BaseFragment<in T : BasePresenter< Viewable>> : Fragment(), Viewa
      */
     override fun setTitle(@StringRes resource: Int) {
         setTitle(getString(resource))
+    }
+
+
+    fun getPresenter(): T? {
+        return presenter
     }
 
     /**
@@ -186,7 +192,8 @@ abstract class BaseFragment<in T : BasePresenter< Viewable>> : Fragment(), Viewa
     /**
      * Every fragment should be able to set its presenter class
      */
-    fun injectPresenter(presenter: T) {
+
+   open public fun injectPresenter(presenter: T) {
         this.presenter = presenter
     }
 
