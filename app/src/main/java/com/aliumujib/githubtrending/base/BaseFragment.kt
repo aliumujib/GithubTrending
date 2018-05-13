@@ -22,7 +22,7 @@ abstract class BaseFragment<in T : BasePresenter< Viewable>> : Fragment(), Viewa
     /**
      * {@inheritDoc}
      */
-    private var presenter: T? = null
+    protected var presenter: T? = null
 
     protected abstract val layoutId: Int
 

@@ -7,10 +7,16 @@ import com.google.gson.annotations.SerializedName
 /**
  * Created by aliumujib on 12/05/2018.
  *
- *  Represents a user on the presentation layer
+ *  Represents a user on the data layer
  */
 
 @Entity
-data class UserEntity(@SerializedName("login")  var name: String,
-                 @SerializedName("avatar_url")  var imageUrl: String,
-                 @PrimaryKey @SerializedName("id")  var id: Int?)
+data class UserEntity(
+
+        @SerializedName("login")  var name: String,
+
+        @SerializedName("avatar_url")  var imageUrl: String,
+
+        @PrimaryKey @SerializedName("id")  var id: Int?
+
+)

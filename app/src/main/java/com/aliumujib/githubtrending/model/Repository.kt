@@ -11,7 +11,7 @@ import com.google.gson.annotations.SerializedName
  * Represents a repository on the presentation layer
  */
 
-class Repository(val id: Int?, val repoFullName: String,
+data class Repository(val id: Int?, val repoFullName: String,
                  val repoName: String, val repoDescription: String,
                  val user: User, val starsCount: Int,
                  val language: String) : Parcelable {
@@ -38,6 +38,34 @@ class Repository(val id: Int?, val repoFullName: String,
         return 0
     }
 
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as Repository
+
+        if (id != other.id) return false
+        if (repoFullName != other.repoFullName) return false
+        if (repoName != other.repoName) return false
+        if (repoDescription != other.repoDescription) return false
+        if (user != other.user) return false
+        if (starsCount != other.starsCount) return false
+        if (language != other.language) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = id ?: 0
+        result = 31 * result + repoFullName.hashCode()
+        result = 31 * result + repoName.hashCode()
+        result = 31 * result + repoDescription.hashCode()
+        result = 31 * result + user.hashCode()
+        result = 31 * result + starsCount
+        result = 31 * result + language.hashCode()
+        return result
+    }
+
     companion object CREATOR : Parcelable.Creator<Repository> {
         override fun createFromParcel(parcel: Parcel): Repository {
             return Repository(parcel)
@@ -47,5 +75,8 @@ class Repository(val id: Int?, val repoFullName: String,
             return arrayOfNulls(size)
         }
     }
+
+
+
 
 }

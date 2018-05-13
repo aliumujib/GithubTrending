@@ -11,8 +11,11 @@ import javax.inject.Inject
  */
 
 class GithubCache @Inject constructor(private val dao: GithubDao) : IGitHubCache {
+    override fun putRepositories(repos: List<RepositoryEntity>) {
 
-    override fun getRepositories(filters: Map<String, String>): Observable<List<RepositoryEntity>>{
+    }
+
+    override fun getRepositories(filters: Map<String, String>): Observable<List<RepositoryEntity>> {
         return dao.getFavorites().toObservable()
     }
 

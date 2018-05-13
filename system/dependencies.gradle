@@ -41,7 +41,7 @@ ext {
     materialChipsVersion = "1.2.1"
     archLifeCycleComponentsVersion = '1.1.0'
     roomVersion = '1.0.0'
-
+    paging_version = "1.0.0"
 
     //Testing
     jUnitVersion = '4.12'
@@ -74,18 +74,21 @@ ext {
             fragmentArgs            : "com.hannesdorfmann.fragmentargs:annotation:${fragmentArgsVersion}",
             fragmentArgsCompiler    : "com.hannesdorfmann.fragmentargs:processor:${fragmentArgsVersion}",
             cardView                : "com.android.support:cardview-v7:$rootProject.ext.supportVersion",
-            playServicesMaps     : "com.google.android.gms:play-services-maps:${playServicesVersion}",
-            playServicesLocation : "com.google.android.gms:play-services-location:${playServicesVersion}",
-            firebaseCore         : "com.google.firebase:firebase-core:${playServicesVersion}",
-            firebaseMessaging    : "com.google.firebase:firebase-messaging:${playServicesVersion}",
-            androidMapUtils      : "com.google.maps.android:android-maps-utils:0.5",
-            greenRobotUtils      : "com.github.remychantenay:greenrobotutils:${greenRobotUtilsVersion}",
-            dateTimePicker       : "com.wdullaer:materialdatetimepicker:${dateTimePicker}",
-            roomDB               : "android.arch.persistence.room:runtime:${roomVersion}",
-            roomCompiler         : "android.arch.persistence.room:compiler:${roomVersion}",
-            roomRxJava2          : "android.arch.persistence.room:rxjava2:${roomVersion}",
-            materialStyledDialogs: "com.github.javiersantos:MaterialStyledDialogs:${materialStyledDialogsVersion}",
-            firebaseJobDispatcher: "com.firebase:firebase-jobdispatcher:${firebaseJobDispatcher}"
+            playServicesMaps        : "com.google.android.gms:play-services-maps:${playServicesVersion}",
+            playServicesLocation    : "com.google.android.gms:play-services-location:${playServicesVersion}",
+            firebaseCore            : "com.google.firebase:firebase-core:${playServicesVersion}",
+            firebaseMessaging       : "com.google.firebase:firebase-messaging:${playServicesVersion}",
+            androidMapUtils         : "com.google.maps.android:android-maps-utils:0.5",
+            greenRobotUtils         : "com.github.remychantenay:greenrobotutils:${greenRobotUtilsVersion}",
+            dateTimePicker          : "com.wdullaer:materialdatetimepicker:${dateTimePicker}",
+            roomDB                  : "android.arch.persistence.room:runtime:${roomVersion}",
+            roomCompiler            : "android.arch.persistence.room:compiler:${roomVersion}",
+            roomRxJava2             : "android.arch.persistence.room:rxjava2:${roomVersion}",
+            materialStyledDialogs   : "com.github.javiersantos:MaterialStyledDialogs:${materialStyledDialogsVersion}",
+            firebaseJobDispatcher   : "com.firebase:firebase-jobdispatcher:${firebaseJobDispatcher}",
+            pagingLibrary           : "android.arch.paging:runtime:$paging_version",
+            pagingRxJava2           : "android.arch.paging:rxjava2:1.0.0-alpha1",
+            picassoImageLoader      : "com.squareup.picasso:picasso:2.71828"
     ]
 
     testDependencies = [

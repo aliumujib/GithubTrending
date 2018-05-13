@@ -15,7 +15,7 @@ class RepositoryMapper @Inject constructor(private val userMapper: UserMapper) :
                 repoName = from.repoName,
                 repoFullName = from.repoFullName,
                 repoDescription = from.repoDescription,
-                user = userMapper.mapFrom(from.user),
+                user = userMapper.mapFrom(from.user!!),
                 starsCount = from.starsCount,
                 language = from.language
         )

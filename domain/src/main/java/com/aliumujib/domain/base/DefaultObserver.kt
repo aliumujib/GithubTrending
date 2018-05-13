@@ -6,7 +6,7 @@ import io.reactivex.observers.DisposableObserver
  * Created by aliumujib on 12/05/2018.
  */
 
-class DefaultObserver<T> : DisposableObserver<T>() {
+open class DefaultObserver<T> : DisposableObserver<T>() {
     override fun onNext(t: T) {
         // Intentionally empty.
     }

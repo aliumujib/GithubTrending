@@ -68,6 +68,8 @@ dependencies {
             appDependencies.roomRxJava2,
             appDependencies.retrofit,
             appDependencies.retrofitGson,
+            appDependencies.pagingLibrary,
+            appDependencies.pagingRxJava2,
             appDependencies.retrofitRxAdapter,
     )
 
