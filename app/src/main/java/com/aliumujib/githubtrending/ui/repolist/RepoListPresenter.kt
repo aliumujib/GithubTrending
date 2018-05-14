@@ -13,12 +13,16 @@ import com.aliumujib.githubtrending.model.Repository
  * Created by aliumujib on 12/05/2018.
  */
 class RepoListPresenter(private var getRepositoriesFromDBUseCase: GetRepositoriesFromDBUseCase,
-                        var repositoryModelMapper: RepositoryModelMapper = RepositoryModelMapper()) : BasePresenter<RepoListContracts.View>(),
+                        var repositoryModelMapper: RepositoryModelMapper = RepositoryModelMapper(), val navigator: RepoListContracts.Navigator) : BasePresenter<RepoListContracts.View>(),
         RepoListContracts.Presenter {
 
+    override fun gotoDetailsScreen(repository: Repository) {
+        navigator.openRepository(repository = repository)
+    }
 
-    override fun loadMore(skipCount: Int) {
-        var currentPage = skipCount / Constants.FILTERS_CONSTANTS.COUNT_PER_PAGE
+
+    override fun loadMore(itemCount: Int) {
+        var currentPage = itemCount / Constants.FILTERS_CONSTANTS.COUNT_PER_PAGE
         params.putInt(Constants.FILTERS_CONSTANTS.PAGE_NUMBER, currentPage + 1)
         getRepositoriesFromDBUseCase.loadMore(params)
     }
@@ -33,7 +37,14 @@ class RepoListPresenter(private var getRepositoriesFromDBUseCase: GetRepositorie
         params.putInt(Constants.FILTERS_CONSTANTS.PER_PAGE, Constants.FILTERS_CONSTANTS.COUNT_PER_PAGE)
     }
 
+
+    override fun onStop() {
+        super.onStop()
+        getRepositoriesFromDBUseCase.dispose()
+    }
+
     override fun refresh() {
+        params.putInt(Constants.FILTERS_CONSTANTS.PAGE_NUMBER, 1)
         getRepositoriesFromDBUseCase.refresh(params)
     }
 

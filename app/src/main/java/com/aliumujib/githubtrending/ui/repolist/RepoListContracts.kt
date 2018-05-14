@@ -33,5 +33,13 @@ interface RepoListContracts {
         fun refresh()
 
         fun loadMore(skipCount: Int)
+
+        fun gotoDetailsScreen(repository: Repository)
+    }
+
+
+     interface Navigator {
+
+        fun openRepository(repository: Repository)
     }
 }
