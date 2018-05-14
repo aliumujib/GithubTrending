@@ -31,5 +31,7 @@ interface RepoListContracts {
         fun retry()
 
         fun refresh()
+
+        fun loadMore(skipCount: Int)
     }
 }

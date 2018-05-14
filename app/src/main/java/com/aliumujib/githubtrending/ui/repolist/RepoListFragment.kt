@@ -5,6 +5,7 @@ import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.widget.LinearLayout
 import com.aliumujib.githubtrending.ApplicationClass
@@ -12,7 +13,9 @@ import com.aliumujib.githubtrending.R
 import com.aliumujib.githubtrending.base.BaseFragment
 import com.aliumujib.githubtrending.di.repolist.DaggerRepoListComponent
 import com.aliumujib.githubtrending.di.repolist.RepoListComponent
+import com.aliumujib.githubtrending.model.NetworkState
 import com.aliumujib.githubtrending.model.Repository
+import com.aliumujib.githubtrending.ui.repolist.adapter.EndlessRecyclerViewScrollListener
 import com.aliumujib.githubtrending.ui.repolist.adapter.RepoAdapter
 import com.aliumujib.githubtrending.utils.ImageLoader
 import com.aliumujib.githubtrending.utils.PicassoImageLoader
@@ -50,12 +53,14 @@ class RepoListFragment : BaseFragment<RepoListPresenter>(), RepoListContracts.Vi
         super.hideLoading()
         progress.visibility = View.GONE
         swipe_refresh.isRefreshing = false
+        adapter.setNetworkState(NetworkState.LOADED)
     }
 
     override fun showLoading() {
         super.showLoading()
         progress.visibility = View.VISIBLE
         swipe_refresh.isRefreshing = true
+        adapter.setNetworkState(NetworkState.LOADING)
     }
 
 
@@ -82,7 +87,7 @@ class RepoListFragment : BaseFragment<RepoListPresenter>(), RepoListContracts.Vi
     }
 
     override fun showErrorView() {
-
+        adapter.setNetworkState(NetworkState.error("Failed to load"))
     }
 
     override fun showEmptyView() {
@@ -97,10 +102,21 @@ class RepoListFragment : BaseFragment<RepoListPresenter>(), RepoListContracts.Vi
 
 
     private fun initAdapter() {
-        recyclerview.layoutManager = LinearLayoutManager(context)
+        var linearLayoutManager= LinearLayoutManager(context)
+        recyclerview.layoutManager = linearLayoutManager
         recyclerview.addItemDecoration( DividerItemDecoration(context, LinearLayout.VERTICAL))
         adapter = RepoAdapter({ getPresenter()?.retry() }, imageLoader)
         recyclerview.adapter = adapter
+
+        var scrollListener : EndlessRecyclerViewScrollListener = object : EndlessRecyclerViewScrollListener(linearLayoutManager) {
+            override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView?) {
+                adapter.setNetworkState(NetworkState.LOADING)
+                getPresenter()?.loadMore(adapter.itemCount)
+            }
+
+        }
+
+        recyclerview.addOnScrollListener(scrollListener)
     }
 
     private fun initToolbar(){

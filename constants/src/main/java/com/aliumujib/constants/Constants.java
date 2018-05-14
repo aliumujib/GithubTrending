@@ -15,6 +15,10 @@ public interface Constants {
 
         String SORT_TYPE_STARS = "stars";
         String ORDER_TYPE_DESC = "desc";
+        String PER_PAGE = "per_page";
+        String PAGE_NUMBER = "page";
+
+        int COUNT_PER_PAGE = 5;
     }
 
 }

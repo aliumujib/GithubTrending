@@ -10,10 +10,19 @@ import io.reactivex.Observable
  * Created by aliumujib on 12/05/2018.
  */
 class GitHubRepository constructor(private val githubCache: IGitHubCache, private val githubCloud: IGitHubCloud) : IGitHubRepository {
+    override fun loadMoreRepositories(filters: Map<String, String>) {
+        loadReposFromCloud(false, filters)
+    }
 
     override fun refreshRepositories(filters: Map<String, String>) {
+        loadReposFromCloud(true, filters)
+    }
+
+    fun loadReposFromCloud(clearDB: Boolean, filters: Map<String, String>){
         githubCloud.fetchRepositories(filters).subscribe({ data ->
-            githubCache.clearRepositories()
+           if(clearDB){
+               githubCache.clearRepositories()
+           }
             githubCache.putRepositories(data)
         }, { t: Throwable? ->
             t?.printStackTrace()

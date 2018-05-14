@@ -12,4 +12,6 @@ interface IGitHubRepository {
 
     fun refreshRepositories(filters: Map<String, String>)
 
+    fun loadMoreRepositories(filters: Map<String, String>)
+
 }

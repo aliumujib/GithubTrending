@@ -28,5 +28,8 @@ class GetRepositoriesFromDBUseCase @Inject constructor(private val gitHubReposit
         gitHubRepository.refreshRepositories(params.getParameters() as Map<String, String>)
     }
 
+    fun loadMore(params: Params){
+        gitHubRepository.loadMoreRepositories(params.getParameters() as Map<String, String>)
+    }
 
 }

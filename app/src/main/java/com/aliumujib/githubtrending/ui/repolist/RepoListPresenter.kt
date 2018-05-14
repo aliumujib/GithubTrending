@@ -14,7 +14,14 @@ import com.aliumujib.githubtrending.model.Repository
  */
 class RepoListPresenter(private var getRepositoriesFromDBUseCase: GetRepositoriesFromDBUseCase,
                         var repositoryModelMapper: RepositoryModelMapper = RepositoryModelMapper()) : BasePresenter<RepoListContracts.View>(),
-                        RepoListContracts.Presenter {
+        RepoListContracts.Presenter {
+
+
+    override fun loadMore(skipCount: Int) {
+        var currentPage = skipCount / Constants.FILTERS_CONSTANTS.COUNT_PER_PAGE
+        params.putInt(Constants.FILTERS_CONSTANTS.PAGE_NUMBER, currentPage + 1)
+        getRepositoriesFromDBUseCase.loadMore(params)
+    }
 
 
     var params: Params = Params.create()
@@ -23,12 +30,10 @@ class RepoListPresenter(private var getRepositoriesFromDBUseCase: GetRepositorie
         params.putString(Constants.FILTERS_CONSTANTS.ORDER, Constants.FILTERS_CONSTANTS.ORDER_TYPE_DESC)
         params.putString(Constants.FILTERS_CONSTANTS.QUERY, "android+language:java+language:kotlin")
         params.putString(Constants.FILTERS_CONSTANTS.SORT, Constants.FILTERS_CONSTANTS.SORT_TYPE_STARS)
+        params.putInt(Constants.FILTERS_CONSTANTS.PER_PAGE, Constants.FILTERS_CONSTANTS.COUNT_PER_PAGE)
     }
 
     override fun refresh() {
-
-        //https://api.github.com/search/repositories?q=android+language:java+language:kotlin&sort=stars&order=desc
-
         getRepositoriesFromDBUseCase.refresh(params)
     }
 
@@ -42,10 +47,10 @@ class RepoListPresenter(private var getRepositoriesFromDBUseCase: GetRepositorie
     }
 
     override fun onGetRepoSuccess(data: MutableList<Repository>) {
-        if(!data.isEmpty()){
+        if (!data.isEmpty()) {
             getView()?.hideLoading()
             getView()?.setData(data)
-        }else{
+        } else {
             getView()?.showEmptyView()
         }
     }
