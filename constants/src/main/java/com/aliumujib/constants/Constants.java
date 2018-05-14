@@ -18,7 +18,7 @@ public interface Constants {
         String PER_PAGE = "per_page";
         String PAGE_NUMBER = "page";
 
-        int COUNT_PER_PAGE = 5;
+        int COUNT_PER_PAGE = 50;
     }
 
 }

@@ -15,7 +15,9 @@
         android:name=".ApplicationClass"
         tools:ignore="GoogleAppIndexingWarning">
 
-        <activity android:name=".ui.MainActivity">
+        <receiver android:name=".ui.repodetails.DetailCustomTab$CopyBroadcastReceiver" />
+
+        <activity android:name=".ui.main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

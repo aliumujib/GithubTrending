@@ -20,7 +20,7 @@ class ApiClient @Inject constructor() {
         val httpClientBuilder = OkHttpClient.Builder()
         val logging = HttpLoggingInterceptor()
         if (BuildConfig.DEBUG) {
-            logging.level = HttpLoggingInterceptor.Level.BODY
+            logging.level = HttpLoggingInterceptor.Level.BASIC
         } else {
             logging.level = HttpLoggingInterceptor.Level.BASIC
         }

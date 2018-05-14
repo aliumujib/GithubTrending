@@ -50,7 +50,7 @@ ext {
     espressoContribVersion = '2.2.2'
     testingSupportLibVersion = '0.1'
     mockWebServerVersion = '3.6.0'
-    anko_version='0.10.5'
+    anko_version = '0.10.5'
 
     appDependencies = [
             daggerCompiler          : "com.google.dagger:dagger-compiler:${daggerVersion}",
@@ -89,7 +89,8 @@ ext {
             pagingLibrary           : "android.arch.paging:runtime:$paging_version",
             pagingRxJava2           : "android.arch.paging:rxjava2:1.0.0-alpha1",
             picassoImageLoader      : "com.squareup.picasso:picasso:2.71828",
-            ankoVersion          : "org.jetbrains.anko:anko:$anko_version"
+            ankoVersion             : "org.jetbrains.anko:anko:$anko_version",
+            customTabs              : "com.android.support:customtabs:$supportVersion"
     ]
 
     testDependencies = [

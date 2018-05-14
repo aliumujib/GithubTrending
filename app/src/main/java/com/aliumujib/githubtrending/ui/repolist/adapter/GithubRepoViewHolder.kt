@@ -13,7 +13,7 @@ import com.aliumujib.githubtrending.utils.ImageLoader
 /**
  * A RecyclerView ViewHolder that displays a Github repository.
  */
-class GithubRepoViewHolder(view: View, private var imageLoader: ImageLoader)
+class GithubRepoViewHolder(view: View, private var imageLoader: ImageLoader, private val clickCallback: (Repository?) -> Unit)
     : RecyclerView.ViewHolder(view) {
     private val repoFullName: TextView = view.findViewById(R.id.repo_fullname)
     private val repoDescription: TextView = view.findViewById(R.id.repo_description)
@@ -24,7 +24,7 @@ class GithubRepoViewHolder(view: View, private var imageLoader: ImageLoader)
 
     init {
         view.setOnClickListener {
-
+            clickCallback.invoke(repository)
         }
     }
 
@@ -38,10 +38,10 @@ class GithubRepoViewHolder(view: View, private var imageLoader: ImageLoader)
     }
 
     companion object {
-        fun create(parent: ViewGroup, imageLoader: ImageLoader): GithubRepoViewHolder {
+        fun create(parent: ViewGroup, imageLoader: ImageLoader, clickCallback: (Repository?) -> Unit): GithubRepoViewHolder {
             val view = LayoutInflater.from(parent.context)
                     .inflate(R.layout.repo_list_item, parent, false)
-            return GithubRepoViewHolder(view, imageLoader)
+            return GithubRepoViewHolder(view, imageLoader, clickCallback = clickCallback)
         }
     }
 

@@ -13,6 +13,7 @@ import com.aliumujib.githubtrending.R
 import com.aliumujib.githubtrending.base.BaseFragment
 import com.aliumujib.githubtrending.di.repolist.DaggerRepoListComponent
 import com.aliumujib.githubtrending.di.repolist.RepoListComponent
+import com.aliumujib.githubtrending.di.repolist.RepoListModule
 import com.aliumujib.githubtrending.model.NetworkState
 import com.aliumujib.githubtrending.model.Repository
 import com.aliumujib.githubtrending.ui.repolist.adapter.EndlessRecyclerViewScrollListener
@@ -45,7 +46,9 @@ class RepoListFragment : BaseFragment<RepoListPresenter>(), RepoListContracts.Vi
         super.injectDependencies()
 
         component = DaggerRepoListComponent.builder()
-                .appComponent(ApplicationClass.getInstance().appComponent).build()
+                .appComponent(ApplicationClass.getInstance().appComponent)
+                .repoListModule(RepoListModule(context!!))
+                .build()
         component.inject(this)
     }
 
@@ -105,7 +108,10 @@ class RepoListFragment : BaseFragment<RepoListPresenter>(), RepoListContracts.Vi
         var linearLayoutManager= LinearLayoutManager(context)
         recyclerview.layoutManager = linearLayoutManager
         recyclerview.addItemDecoration( DividerItemDecoration(context, LinearLayout.VERTICAL))
-        adapter = RepoAdapter({ getPresenter()?.retry() }, imageLoader)
+        adapter = RepoAdapter({
+            repository ->
+            getPresenter()?.gotoDetailsScreen(repository!!)
+        },{ getPresenter()?.retry() }, imageLoader)
         recyclerview.adapter = adapter
 
         var scrollListener : EndlessRecyclerViewScrollListener = object : EndlessRecyclerViewScrollListener(linearLayoutManager) {
