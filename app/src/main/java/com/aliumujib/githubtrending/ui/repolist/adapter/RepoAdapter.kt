@@ -8,7 +8,7 @@ import com.aliumujib.githubtrending.model.NetworkState
 import com.aliumujib.githubtrending.model.Repository
 
 /**
- * A simple adapter implementation that shows Reddit posts.
+ * A simple adapter implementation that shows Github Repositories.
  */
 class RepoAdapter(private val retryCallback: () -> Unit) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 

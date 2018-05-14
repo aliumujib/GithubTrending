@@ -10,4 +10,6 @@ interface IGitHubRepository {
 
     fun fetchRepositories(filters: Map<String, String>): Observable<List<RepositoryEntity>>
 
+    fun refreshRepositories(filters: Map<String, String>)
+
 }

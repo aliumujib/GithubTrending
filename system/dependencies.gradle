@@ -50,7 +50,7 @@ ext {
     espressoContribVersion = '2.2.2'
     testingSupportLibVersion = '0.1'
     mockWebServerVersion = '3.6.0'
-
+    anko_version='0.10.5'
 
     appDependencies = [
             daggerCompiler          : "com.google.dagger:dagger-compiler:${daggerVersion}",
@@ -88,7 +88,8 @@ ext {
             firebaseJobDispatcher   : "com.firebase:firebase-jobdispatcher:${firebaseJobDispatcher}",
             pagingLibrary           : "android.arch.paging:runtime:$paging_version",
             pagingRxJava2           : "android.arch.paging:rxjava2:1.0.0-alpha1",
-            picassoImageLoader      : "com.squareup.picasso:picasso:2.71828"
+            picassoImageLoader      : "com.squareup.picasso:picasso:2.71828",
+            ankoVersion          : "org.jetbrains.anko:anko:$anko_version"
     ]
 
     testDependencies = [

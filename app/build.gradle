@@ -64,6 +64,7 @@ dependencies {
             appDependencies.pagingLibrary,
             appDependencies.pagingRxJava2,
             appDependencies.picassoImageLoader,
+            appDependencies.ankoVersion,
             project(':domain'),
             project(':data'),
             project(':constants')

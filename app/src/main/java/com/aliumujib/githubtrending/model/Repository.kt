@@ -14,7 +14,7 @@ import com.google.gson.annotations.SerializedName
 data class Repository(val id: Int?, val repoFullName: String,
                  val repoName: String, val repoDescription: String,
                  val user: User, val starsCount: Int,
-                 val language: String) : Parcelable {
+                 val language: String?) : Parcelable {
     constructor(parcel: Parcel) : this(
             parcel.readValue(Int::class.java.classLoader) as? Int,
             parcel.readString(),
@@ -62,7 +62,6 @@ data class Repository(val id: Int?, val repoFullName: String,
         result = 31 * result + repoDescription.hashCode()
         result = 31 * result + user.hashCode()
         result = 31 * result + starsCount
-        result = 31 * result + language.hashCode()
         return result
     }
 

@@ -50,6 +50,7 @@ dependencies {
 
     compile appDependencies.dagger
     compile appDependencies.rxJava
+    compile appDependencies.ankoVersion
     compile project(path: ':data')
 
     annotationProcessor appDependencies.daggerCompiler

@@ -16,6 +16,11 @@ abstract class BasePresenter<out T : Viewable> : Presentable {
     override val isViewAttached: Boolean
         get() = view != null
 
+
+    open fun getView():T? {
+        return view
+    }
+
     override fun onStart() {
         // No-op by default
     }

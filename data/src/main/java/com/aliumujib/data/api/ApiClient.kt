@@ -1,4 +1,4 @@
-package com.aliumujib.githubtrending.di
+package com.aliumujib.data.api
 
 import com.aliumujib.data.BuildConfig
 import com.google.gson.GsonBuilder

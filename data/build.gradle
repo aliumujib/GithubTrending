@@ -71,6 +71,7 @@ dependencies {
             appDependencies.pagingLibrary,
             appDependencies.pagingRxJava2,
             appDependencies.retrofitRxAdapter,
+            appDependencies.ankoVersion,
     )
 
     kapt appDependencies.daggerCompiler

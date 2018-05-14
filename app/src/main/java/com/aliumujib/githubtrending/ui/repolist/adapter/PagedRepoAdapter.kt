@@ -9,7 +9,7 @@ import com.aliumujib.githubtrending.model.NetworkState
 import com.aliumujib.githubtrending.model.Repository
 
 /**
- * A simple adapter implementation that shows Reddit posts.
+ * A paged adapter implementation that shows Github Repositories, supports the new paging library.
  */
 class PagedRepoAdapter(private val retryCallback: () -> Unit) : PagedListAdapter<Repository, RecyclerView.ViewHolder>(POST_COMPARATOR) {
     private var networkState: NetworkState? = null

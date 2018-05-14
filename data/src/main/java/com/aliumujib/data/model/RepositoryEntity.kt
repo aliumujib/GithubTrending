@@ -23,14 +23,10 @@ data class RepositoryEntity (
 
         @SerializedName("description") var repoDescription: String,
 
-        @Ignore @SerializedName("owner") var user: UserEntity?,
+        @SerializedName("owner") var user: UserEntity?,
 
         @SerializedName("stargazers_count") var starsCount: Int,
 
-        @SerializedName("language") var language: String
+        @SerializedName("language") var language: String?
 
-){
-
-    constructor() : this(0, "", "", "", null, 0, "")
-
-}
+)

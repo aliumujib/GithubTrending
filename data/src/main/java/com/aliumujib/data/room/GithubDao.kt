@@ -13,4 +13,10 @@ interface GithubDao {
     @Query("SELECT * FROM REPOSITORIES")
     fun getFavorites(): Flowable<List<RepositoryEntity>>
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun saveAllMovies(movies: List<RepositoryEntity>)
+
+    @Query("DELETE FROM REPOSITORIES")
+    fun clear()
+
 }

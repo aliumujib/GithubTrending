@@ -9,4 +9,4 @@ package com.aliumujib.domain.entities
 class RepositoryModel(val id: Int?, val repoFullName: String,
                       val repoName: String, val repoDescription: String,
                       val user: UserModel, val starsCount: Int,
-                      val language: String)
+                      val language: String?)

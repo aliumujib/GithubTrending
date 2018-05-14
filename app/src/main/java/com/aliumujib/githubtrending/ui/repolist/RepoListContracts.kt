@@ -14,9 +14,7 @@ interface RepoListContracts {
     interface View : Viewable {
         fun setData(data: MutableList<Repository>)
 
-        fun setPagedData(data: PagedList<Repository>)
-
-
+        //fun setPagedData(data: PagedList<Repository>)
     }
 
 
@@ -24,8 +22,10 @@ interface RepoListContracts {
 
         fun onGetRepoSuccess(data: MutableList<Repository>)
 
-        fun onGetDataFailure()
+        fun onGetDataFailure(exception: Throwable)
 
         fun retry()
+
+        fun refresh()
     }
 }

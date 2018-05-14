@@ -23,11 +23,11 @@ abstract class BaseUseCase <T> (private val disposables: CompositeDisposable = C
      * @param observer [DisposableObserver] which will be listening to the observable build
      * with [.getObservable].
      */
-    fun execute(observer: DisposableObserver<Any>, params: Params) {
+    fun execute(observer: DisposableObserver<T>, params: Params) {
         val observable = this.getObservable(params)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-        addDisposable(observable.subscribeWith<DisposableObserver<Any>>(observer))
+        addDisposable(observable.subscribeWith<DisposableObserver<T>>(observer))
     }
 
 
