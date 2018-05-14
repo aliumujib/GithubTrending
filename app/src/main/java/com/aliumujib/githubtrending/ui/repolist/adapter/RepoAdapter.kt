@@ -6,11 +6,12 @@ import android.view.ViewGroup
 import com.aliumujib.githubtrending.R
 import com.aliumujib.githubtrending.model.NetworkState
 import com.aliumujib.githubtrending.model.Repository
+import com.aliumujib.githubtrending.utils.ImageLoader
 
 /**
  * A simple adapter implementation that shows Github Repositories.
  */
-class RepoAdapter(private val retryCallback: () -> Unit) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class RepoAdapter(private val retryCallback: () -> Unit, private val imageLoader: ImageLoader) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var list: MutableList<Repository> = mutableListOf()
     private var networkState: NetworkState? = null
@@ -47,7 +48,7 @@ class RepoAdapter(private val retryCallback: () -> Unit) : RecyclerView.Adapter<
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
-            R.layout.repo_list_item -> GithubRepoViewHolder.create(parent)
+            R.layout.repo_list_item -> GithubRepoViewHolder.create(parent, imageLoader)
             R.layout.network_state_item -> NetworkStateItemViewHolder.create(parent, retryCallback)
             else -> throw IllegalArgumentException("unknown view type $viewType")
         }

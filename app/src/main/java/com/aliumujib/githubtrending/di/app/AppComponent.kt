@@ -6,6 +6,7 @@ import com.aliumujib.githubtrending.di.app.modules.AppModule
 import com.aliumujib.githubtrending.di.app.modules.DatabaseModule
 import com.aliumujib.githubtrending.di.app.modules.NetworkModule
 import com.aliumujib.githubtrending.di.app.scopes.ApplicationScope
+import com.aliumujib.githubtrending.utils.ImageLoader
 import dagger.Component
 
 /**
@@ -25,4 +26,5 @@ interface AppComponent {
     fun inject(app: ApplicationClass)
 
     fun repository(): IGitHubRepository
+
 }

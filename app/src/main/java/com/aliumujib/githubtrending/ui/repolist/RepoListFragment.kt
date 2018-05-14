@@ -1,9 +1,12 @@
 package com.aliumujib.githubtrending.ui.repolist
 
 
+import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
+import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
+import android.widget.LinearLayout
 import com.aliumujib.githubtrending.ApplicationClass
 import com.aliumujib.githubtrending.R
 import com.aliumujib.githubtrending.base.BaseFragment
@@ -11,6 +14,9 @@ import com.aliumujib.githubtrending.di.repolist.DaggerRepoListComponent
 import com.aliumujib.githubtrending.di.repolist.RepoListComponent
 import com.aliumujib.githubtrending.model.Repository
 import com.aliumujib.githubtrending.ui.repolist.adapter.RepoAdapter
+import com.aliumujib.githubtrending.utils.ImageLoader
+import com.aliumujib.githubtrending.utils.PicassoImageLoader
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_repo_list.*
 import javax.inject.Inject
 
@@ -31,11 +37,13 @@ class RepoListFragment : BaseFragment<RepoListPresenter>(), RepoListContracts.Vi
 
     private lateinit var component: RepoListComponent
 
+    private var imageLoader: ImageLoader = PicassoImageLoader(Picasso.get())
+
     override fun injectDependencies() {
         super.injectDependencies()
 
         component = DaggerRepoListComponent.builder()
-                    .appComponent(ApplicationClass.getInstance().appComponent).build()
+                .appComponent(ApplicationClass.getInstance().appComponent).build()
         component.inject(this)
     }
 
@@ -71,7 +79,8 @@ class RepoListFragment : BaseFragment<RepoListPresenter>(), RepoListContracts.Vi
 
     private fun initAdapter() {
         recyclerview.layoutManager = LinearLayoutManager(context)
-        adapter = RepoAdapter({ getPresenter()?.retry() })
+        recyclerview.addItemDecoration( DividerItemDecoration(context, LinearLayout.VERTICAL))
+        adapter = RepoAdapter({ getPresenter()?.retry() }, imageLoader)
         recyclerview.adapter = adapter
     }
 

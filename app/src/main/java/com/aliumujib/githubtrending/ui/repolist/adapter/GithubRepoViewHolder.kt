@@ -8,17 +8,18 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.aliumujib.githubtrending.R
 import com.aliumujib.githubtrending.model.Repository
+import com.aliumujib.githubtrending.utils.ImageLoader
 
 /**
  * A RecyclerView ViewHolder that displays a Github repository.
  */
-class GithubRepoViewHolder(view: View)
+class GithubRepoViewHolder(view: View, private var imageLoader: ImageLoader)
     : RecyclerView.ViewHolder(view) {
     private val repoFullName: TextView = view.findViewById(R.id.repo_fullname)
     private val repoDescription: TextView = view.findViewById(R.id.repo_description)
     private val language: TextView = view.findViewById(R.id.language)
-    private val starCount : TextView = view.findViewById(R.id.star_count)
-    private val ownerImage : ImageView = view.findViewById(R.id.owner_image_view)
+    private val starCount: TextView = view.findViewById(R.id.star_count)
+    private val ownerImage: ImageView = view.findViewById(R.id.owner_image_view)
     private var repository: Repository? = null
 
     init {
@@ -31,14 +32,16 @@ class GithubRepoViewHolder(view: View)
         this.repository = repository
         this.repoFullName.text = repository?.repoFullName
         this.language.text = repository?.language
+        this.repoDescription.text = repository?.repoDescription
+        imageLoader.load(repository?.user?.imageUrl!!, ownerImage, true)
         updateScore(repository)
     }
 
     companion object {
-        fun create(parent: ViewGroup): GithubRepoViewHolder {
+        fun create(parent: ViewGroup, imageLoader: ImageLoader): GithubRepoViewHolder {
             val view = LayoutInflater.from(parent.context)
                     .inflate(R.layout.repo_list_item, parent, false)
-            return GithubRepoViewHolder(view)
+            return GithubRepoViewHolder(view, imageLoader)
         }
     }
 

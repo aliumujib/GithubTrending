@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="16dp">
 
@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:ellipsize="end"
-        android:maxLines="1"
+        android:maxLines="2"
         android:id="@+id/repo_description"
         android:textAppearance="@style/TextAppearance.AppCompat.Caption"
         tools:text="Type-safe HTTP client for Android and Java by Square, Inc." />
@@ -37,7 +37,6 @@
             android:layout_height="wrap_content"
             android:id="@+id/language"
             android:textAppearance="@style/TextAppearance.AppCompat.Caption"
-            android:textSize="10sp"
             tools:text="JavaScript " />
 
         <ImageView
@@ -54,7 +53,6 @@
             android:layout_height="wrap_content"
             android:id="@+id/star_count"
             android:textAppearance="@style/TextAppearance.AppCompat.Caption"
-            android:textSize="10sp"
             tools:text="6586 stars last month" />
 
         <ImageView
@@ -69,18 +67,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="@style/TextAppearance.AppCompat.Caption"
-            android:textSize="10sp"
-            tools:text="Built by " />
+            android:text="Built by " />
 
 
         <ImageView
-            android:layout_width="12dp"
+            android:layout_width="16dp"
             android:layout_gravity="center"
             android:layout_marginLeft="4dp"
             android:layout_marginRight="4dp"
             android:id="@+id/owner_image_view"
             android:src="@drawable/leak_canary_icon"
-            android:layout_height="12dp" />
+            android:layout_height="16dp" />
     </LinearLayout>
 
 </LinearLayout>

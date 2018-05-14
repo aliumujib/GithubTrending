@@ -7,11 +7,12 @@ import android.view.ViewGroup
 import com.aliumujib.githubtrending.R
 import com.aliumujib.githubtrending.model.NetworkState
 import com.aliumujib.githubtrending.model.Repository
+import com.aliumujib.githubtrending.utils.ImageLoader
 
 /**
  * A paged adapter implementation that shows Github Repositories, supports the new paging library.
  */
-class PagedRepoAdapter(private val retryCallback: () -> Unit) : PagedListAdapter<Repository, RecyclerView.ViewHolder>(POST_COMPARATOR) {
+class PagedRepoAdapter(private val retryCallback: () -> Unit, private val imageLoader: ImageLoader) : PagedListAdapter<Repository, RecyclerView.ViewHolder>(POST_COMPARATOR) {
     private var networkState: NetworkState? = null
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (getItemViewType(position)) {
@@ -35,7 +36,7 @@ class PagedRepoAdapter(private val retryCallback: () -> Unit) : PagedListAdapter
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
-            R.layout.repo_list_item -> GithubRepoViewHolder.create(parent)
+            R.layout.repo_list_item -> GithubRepoViewHolder.create(parent,imageLoader = imageLoader)
             R.layout.network_state_item -> NetworkStateItemViewHolder.create(parent, retryCallback)
             else -> throw IllegalArgumentException("unknown view type $viewType")
         }
