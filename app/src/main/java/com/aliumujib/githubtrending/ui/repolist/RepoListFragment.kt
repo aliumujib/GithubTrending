@@ -23,7 +23,6 @@ import javax.inject.Inject
 
 class RepoListFragment : BaseFragment<RepoListPresenter>(), RepoListContracts.View {
 
-
     companion object {
         val TAG = "RepoListFragment"
 
@@ -50,11 +49,13 @@ class RepoListFragment : BaseFragment<RepoListPresenter>(), RepoListContracts.Vi
     override fun hideLoading() {
         super.hideLoading()
         progress.visibility = View.GONE
+        swipe_refresh.isRefreshing = false
     }
 
     override fun showLoading() {
         super.showLoading()
         progress.visibility = View.VISIBLE
+        swipe_refresh.isRefreshing = true
     }
 
 
@@ -70,18 +71,41 @@ class RepoListFragment : BaseFragment<RepoListPresenter>(), RepoListContracts.Vi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initAdapter()
+        initToolbar()
+        initSwipeToRefresh()
+    }
+
+    private fun initSwipeToRefresh() {
+        swipe_refresh.setOnRefreshListener {
+            getPresenter()?.refresh()
+        }
+    }
+
+    override fun showErrorView() {
+
+    }
+
+    override fun showEmptyView() {
+
     }
 
     @Inject
     override fun injectPresenter(presenter: RepoListPresenter) {
         super.injectPresenter(presenter)
+
     }
+
 
     private fun initAdapter() {
         recyclerview.layoutManager = LinearLayoutManager(context)
         recyclerview.addItemDecoration( DividerItemDecoration(context, LinearLayout.VERTICAL))
         adapter = RepoAdapter({ getPresenter()?.retry() }, imageLoader)
         recyclerview.adapter = adapter
+    }
+
+    private fun initToolbar(){
+        appCompatActivity.setSupportActionBar(toolbar)
+        appCompatActivity.supportActionBar?.title = "Trending"
     }
 
 

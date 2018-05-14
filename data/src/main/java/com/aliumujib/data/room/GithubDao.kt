@@ -16,6 +16,9 @@ interface GithubDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun saveAllMovies(movies: List<RepositoryEntity>)
 
+    @Query("SELECT COUNT(*) FROM REPOSITORIES")
+    fun getNumberOfRows(): Int
+
     @Query("DELETE FROM REPOSITORIES")
     fun clear()
 

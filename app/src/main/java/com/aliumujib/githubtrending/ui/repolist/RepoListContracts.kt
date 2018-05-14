@@ -14,6 +14,10 @@ interface RepoListContracts {
     interface View : Viewable {
         fun setData(data: MutableList<Repository>)
 
+        fun showEmptyView()
+
+        fun showErrorView()
+
         //fun setPagedData(data: PagedList<Repository>)
     }
 

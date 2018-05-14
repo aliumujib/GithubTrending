@@ -13,4 +13,6 @@ interface IGitHubCache {
     fun putRepositories(repos: List<RepositoryEntity>)
 
     fun clearRepositories()
+
+    fun isEmpty() : Observable<Boolean>
 }

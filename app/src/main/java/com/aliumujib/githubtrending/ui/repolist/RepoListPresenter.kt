@@ -16,24 +16,25 @@ class RepoListPresenter(private var getRepositoriesFromDBUseCase: GetRepositorie
                         var repositoryModelMapper: RepositoryModelMapper = RepositoryModelMapper()) : BasePresenter<RepoListContracts.View>(),
                         RepoListContracts.Presenter {
 
-    override fun refresh() {
 
-        //https://api.github.com/search/repositories?q=android+language:java+language:kotlin&sort=stars&order=desc
+    var params: Params = Params.create()
 
-        var params: Params = Params.create()
+    init {
         params.putString(Constants.FILTERS_CONSTANTS.ORDER, Constants.FILTERS_CONSTANTS.ORDER_TYPE_DESC)
         params.putString(Constants.FILTERS_CONSTANTS.QUERY, "android+language:java+language:kotlin")
         params.putString(Constants.FILTERS_CONSTANTS.SORT, Constants.FILTERS_CONSTANTS.SORT_TYPE_STARS)
-       // params.putString(Constants.FILTERS_CONSTANTS.LANGUAGE, "java")
+    }
+
+    override fun refresh() {
+
+        //https://api.github.com/search/repositories?q=android+language:java+language:kotlin&sort=stars&order=desc
 
         getRepositoriesFromDBUseCase.refresh(params)
     }
 
     override fun onViewCreated() {
         super.onViewCreated()
-        this.refresh()
-
-        getRepositoriesFromDBUseCase.execute(RepositoryCacheObserver(), Params.EMPTY)
+        getRepositoriesFromDBUseCase.execute(RepositoryCacheObserver(), params)
     }
 
     override fun retry() {
@@ -41,8 +42,12 @@ class RepoListPresenter(private var getRepositoriesFromDBUseCase: GetRepositorie
     }
 
     override fun onGetRepoSuccess(data: MutableList<Repository>) {
-        getView()?.hideLoading()
-        getView()?.setData(data)
+        if(!data.isEmpty()){
+            getView()?.hideLoading()
+            getView()?.setData(data)
+        }else{
+            getView()?.showEmptyView()
+        }
     }
 
     override fun onGetDataFailure(exception: Throwable) {

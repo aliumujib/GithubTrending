@@ -28,7 +28,7 @@ abstract class BaseFragment<T : BasePresenter<Viewable>> : Fragment(), Viewable 
     protected abstract val layoutId: Int
 
 
-    private val appCompatActivity: AppCompatActivity
+    protected val appCompatActivity: AppCompatActivity
         get() = activity as AppCompatActivity
 
     /**
