@@ -60,6 +60,13 @@ abstract class BaseFragment<T : BasePresenter<Viewable>> : Fragment(), Viewable 
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        if (presenter != null) {
+            presenter!!.onResume()
+        }
+    }
+
 
     /**
      * {@inheritDoc}

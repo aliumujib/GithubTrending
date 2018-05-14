@@ -1,5 +1,6 @@
 package com.aliumujib.data.contracts
 
+import com.aliumujib.constants.NetworkState
 import com.aliumujib.githubtrending.model.RepositoryEntity
 import io.reactivex.Observable
 
@@ -14,4 +15,5 @@ interface IGitHubRepository {
 
     fun loadMoreRepositories(filters: Map<String, String>)
 
+    fun networkState(): Observable<NetworkState>
 }

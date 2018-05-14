@@ -4,7 +4,7 @@ import android.support.v7.util.DiffUtil
 import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
 import com.aliumujib.githubtrending.R
-import com.aliumujib.githubtrending.model.NetworkState
+import com.aliumujib.constants.NetworkState
 import com.aliumujib.githubtrending.model.Repository
 import com.aliumujib.githubtrending.utils.ImageLoader
 
@@ -67,6 +67,12 @@ class RepoAdapter(private val clickCallback: (Repository?) -> Unit, private val 
     override fun getItemCount(): Int {
         return list.size + if (hasExtraRow()) 1 else 0
     }
+
+    /**
+     * Gives the real item count at any time without the extra item for the loader
+     * */
+     val realItemCount: Int
+        get() = list.size
 
     fun setNetworkState(newNetworkState: NetworkState?) {
         val previousState = this.networkState

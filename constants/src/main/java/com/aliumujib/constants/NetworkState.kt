@@ -1,4 +1,4 @@
-package com.aliumujib.githubtrending.model
+package com.aliumujib.constants
 
 /**
  * Created by aliumujib on 13/05/2018.
