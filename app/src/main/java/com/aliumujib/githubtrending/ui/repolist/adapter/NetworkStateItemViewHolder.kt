@@ -8,8 +8,8 @@ import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.TextView
 import com.aliumujib.githubtrending.R
-import com.aliumujib.githubtrending.model.NetworkState
-import com.aliumujib.githubtrending.model.Status
+import com.aliumujib.constants.NetworkState
+import com.aliumujib.constants.Status
 
 
 /**

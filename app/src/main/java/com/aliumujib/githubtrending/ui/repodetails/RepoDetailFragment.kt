@@ -22,6 +22,9 @@ import com.aliumujib.githubtrending.ui.repolist.RepoListFragment
 import kotlinx.android.synthetic.main.fragment_repo_detail.*
 import javax.inject.Inject
 import android.view.KeyEvent.KEYCODE_BACK
+import com.aliumujib.githubtrending.utils.ImageLoader
+import com.aliumujib.githubtrending.utils.PicassoImageLoader
+import com.squareup.picasso.Picasso
 
 
 /**
@@ -29,11 +32,15 @@ import android.view.KeyEvent.KEYCODE_BACK
  */
 class RepoDetailFragment : BaseFragment<RepoDetailPresenter>(), RepoDetailsContracts.View {
 
+    private var imageLoader: ImageLoader = PicassoImageLoader(Picasso.get())
+
     override fun showData(data: Repository) {
         repo_fullname.text = data.repoFullName
         repo_description.text = data.repoDescription
         toolbar.title = data.repoName
         language.text = data.language
+        imageLoader.load(data.user.imageUrl, owner_image_view, true)
+        user_name.text = "Built by ${data.user.name}"
         star_count.text = "${data.starsCount} stars"
         repo_fullname.setOnClickListener {
             getPresenter()?.gotoRepositoryWebPage()
@@ -53,7 +60,7 @@ class RepoDetailFragment : BaseFragment<RepoDetailPresenter>(), RepoDetailsContr
 
         getView()?.isFocusableInTouchMode = true
         getView()?.requestFocus()
-        getView()?.setOnKeyListener { v, keyCode, event ->
+        getView()?.setOnKeyListener { _, keyCode, _ ->
             if (keyCode == KeyEvent.KEYCODE_BACK) {
                 getPresenter()?.closeView()
                 true

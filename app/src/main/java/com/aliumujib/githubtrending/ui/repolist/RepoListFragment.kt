@@ -1,20 +1,21 @@
 package com.aliumujib.githubtrending.ui.repolist
 
 
-import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.View
 import android.widget.LinearLayout
+import com.aliumujib.constants.Constants
 import com.aliumujib.githubtrending.ApplicationClass
 import com.aliumujib.githubtrending.R
 import com.aliumujib.githubtrending.base.BaseFragment
 import com.aliumujib.githubtrending.di.repolist.DaggerRepoListComponent
 import com.aliumujib.githubtrending.di.repolist.RepoListComponent
 import com.aliumujib.githubtrending.di.repolist.RepoListModule
-import com.aliumujib.githubtrending.model.NetworkState
+import com.aliumujib.constants.NetworkState
 import com.aliumujib.githubtrending.model.Repository
 import com.aliumujib.githubtrending.ui.repolist.adapter.EndlessRecyclerViewScrollListener
 import com.aliumujib.githubtrending.ui.repolist.adapter.RepoAdapter
@@ -89,8 +90,8 @@ class RepoListFragment : BaseFragment<RepoListPresenter>(), RepoListContracts.Vi
         }
     }
 
-    override fun showErrorView() {
-        adapter.setNetworkState(NetworkState.error("Failed to load"))
+    override fun showErrorView(error: String) {
+        adapter.setNetworkState(NetworkState.error(error))
     }
 
     override fun showEmptyView() {
@@ -105,19 +106,19 @@ class RepoListFragment : BaseFragment<RepoListPresenter>(), RepoListContracts.Vi
 
 
     private fun initAdapter() {
-        var linearLayoutManager= LinearLayoutManager(context)
+        var linearLayoutManager = LinearLayoutManager(context)
         recyclerview.layoutManager = linearLayoutManager
-        recyclerview.addItemDecoration( DividerItemDecoration(context, LinearLayout.VERTICAL))
-        adapter = RepoAdapter({
-            repository ->
+        recyclerview.addItemDecoration(DividerItemDecoration(context, LinearLayout.VERTICAL))
+        adapter = RepoAdapter({ repository ->
             getPresenter()?.gotoDetailsScreen(repository!!)
-        },{ getPresenter()?.retry() }, imageLoader)
+        }, { getPresenter()?.retry() }, imageLoader)
         recyclerview.adapter = adapter
 
-        var scrollListener : EndlessRecyclerViewScrollListener = object : EndlessRecyclerViewScrollListener(linearLayoutManager) {
+        var scrollListener: EndlessRecyclerViewScrollListener = object : EndlessRecyclerViewScrollListener(linearLayoutManager) {
             override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView?) {
                 adapter.setNetworkState(NetworkState.LOADING)
-                getPresenter()?.loadMore(adapter.itemCount)
+                Log.d(TAG, "current count: ${adapter.realItemCount}, current page: ${adapter.realItemCount / Constants.FILTERS_CONSTANTS.COUNT_PER_PAGE}, next page count: ${adapter.realItemCount / (Constants.FILTERS_CONSTANTS.COUNT_PER_PAGE) + 1}")
+                getPresenter()?.loadMore(adapter.realItemCount)
             }
 
         }
@@ -125,7 +126,7 @@ class RepoListFragment : BaseFragment<RepoListPresenter>(), RepoListContracts.Vi
         recyclerview.addOnScrollListener(scrollListener)
     }
 
-    private fun initToolbar(){
+    private fun initToolbar() {
         appCompatActivity.setSupportActionBar(toolbar)
         appCompatActivity.supportActionBar?.title = "Trending"
     }

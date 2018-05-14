@@ -1,6 +1,7 @@
 package com.aliumujib.githubtrending.ui.repolist
 
 import android.arch.paging.PagedList
+import com.aliumujib.constants.NetworkState
 import com.aliumujib.githubtrending.model.Repository
 import com.aliumujib.githubtrending.model.RepositoryEntity
 import com.aliumujib.githubtrending.mvp.Viewable
@@ -16,7 +17,7 @@ interface RepoListContracts {
 
         fun showEmptyView()
 
-        fun showErrorView()
+        fun showErrorView(error: String)
 
         //fun setPagedData(data: PagedList<Repository>)
     }
@@ -35,6 +36,7 @@ interface RepoListContracts {
         fun loadMore(skipCount: Int)
 
         fun gotoDetailsScreen(repository: Repository)
+        fun onNetworkStateChanged(networkState: NetworkState)
     }
 
 
